@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Frozen Food</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=PT+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+  <section id="app">
+    <header class="header fixed top-0 left-0 z-40 w-full px-6 lg:px-0">
+      <div class="max-w-6xl mx-auto flex justify-between py-6">
+        <div class="logo"><a href="#"><img src="assets/icon/logo.png" alt="logo"></a></div>
+        <div class="justify-center items-center hidden lg:flex">
+          <div v-for="i in menus" class="px-4">
+            <div class="capitalize font-bold txt-grey cursor-pointer" @click="gointTo(i.url)">{{ i.name }}</div>
+          </div>
+        </div>
+        <div class="burger-menu block lg:hidden" @click="openMenu = true">
+          <img src="assets/icon/burger.png" alt="burger-icon">
+        </div>
+      </div>
+    </header>
+    <section class="overlay-side min-h-screen fixed top-0 left-0 z-50 w-full" v-if="openMenu" @click="openMenu = false"></section>
+    <section class="side-menu fixed right-0 top-0 z-50 block lg:hidden w-4/6 bg-white" :class="{ 'show' : openMenu }">
+      <div class="relative min-h-screen flex items-center mx-8">
+        <div class="close-menu absolute right-0" @click="openMenu = false">
+          <img src="assets/icon/close.png" alt="close-icon">
+        </div>
+        <div class="w-full">
+            <div class="logo mb-6"><img src="assets/icon/logo.png" alt="logo"></div>
+            <div v-for="(i, key) in menus" class="text-center border-green-ms" :class="{ 'border-b' : key != menus.length-1 }">
+              <div class="capitalize txt-grey block w-full py-6" @click="gointTo(i.url)">{{ i.name }}</div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jumbotron w-full">
+      <div class="swiper-container swiper--jumbotron absolute left-0 top-0 h-full w-full px-6 lg:px-8 box-border">
+        <div class="swiper-wrapper">
+          <div v-for="i in jumbotronImage" class="swiper-slide min-h-screen w-full bg-cover bg-center" :style="{ 'background-image': 'url(assets/img/' + i + ')' }"></div>
+        </div>
+      </div>
+      <div class="min-h-screen max-w-6xl mx-auto relative z-5 flex justify-center items-center">
+        <div class="max-w-xl px-8 text-center">
+          <h1 class="text-5xl lg:text-6xl font-lora text-white lg:leading-tight txt-shadow font-bold">Quis scelerisque.</h1>
+          <p class="text-base lg:text-lg text-white mt-4 lg:mt-8 txt-shadow">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+        </div>
+        <div class="absolute jumbotron--prev cursor-pointer hidden lg:block"></div>
+        <div class="absolute jumbotron--next cursor-pointer hidden lg:block"></div>
+        <div class="absolute button-wrapper flex justify-center w-full md:justify-start px-8 lg:px-0 lg:hidden">
+          <div class="jumbotron--prev mr-6 cursor-pointer"></div>
+          <div class="jumbotron--next cursor-pointer"></div>
+        </div>
+        <div class="absolute pagination-wrapper w-full flex justify-center">
+            <div class="jumbotron--pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="w-full pt-24" id="about-us">
+      <div class="max-w-6xl mx-auto">
+        <div class="lg:flex lg:-mx-4">
+          <div class="lg:w-1/2 px-6 mb-12 lg:mb-0 lg:px-4 text-left">
+            <div class="max-w-2xl text-left">
+              <h3 class="font-bold font-lora txt-grey text-4xl lg:text-5xl pl-6 with-border with-border-left relative">About Us</h3>
+            </div>
+            <p class="mt-12 lg:w-3/4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+            <a href="#" class="rounded uppercase px-8 py-1 mt-6 lg:mt-8 inline-block text-white font-bold bg-green-ms">LEARN MORE</a>
+          </div>
+          <div class="lg:w-1/2 px-6 lg:mb-0 lg:px-4">
+            <img src="assets/img/02.jpg" alt="product">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="w-full py-24" id="our-product">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-2xl px-6 lg:px-0">
+          <h3 class="font-bold font-lora txt-grey text-4xl lg:text-5xl pl-6 with-border relative">Our Product</h3>
+          <p class="mt-12 txt-grey px-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+        </div>
+        <div class="lg:flex mt-8 lg:mt-12 lg:-mx-4 flex-wrap">
+          <div class="lg:w-1/3 px-6 mb-12 lg:mb-8 lg:px-4">
+            <img src="assets/img/04.jpg" alt="product">
+            <h4 class="text-2xl mt-4 font-lora font-bold txt-grey"><a href="#">Lorem Ipsum</a></h4>
+            <p class="mt-4 txt-grey mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+            <a href="#" class="underline txt-green-ms text-lg font-bold">Order via Whatsapp</a>
+          </div>
+          <div class="lg:w-1/3 px-6 mb-12 lg:mb-8 lg:px-4">
+            <img src="assets/img/05.jpg" alt="product">
+            <h4 class="text-2xl mt-4 font-lora font-bold txt-grey"><a href="#">Lorem Ipsum</a></h4>
+            <p class="mt-4 txt-grey mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+            <a href="#" class="underline txt-green-ms text-lg font-bold">Order via Whatsapp</a>
+          </div>
+          <div class="lg:w-1/3 px-6 mb-12 lg:mb-8 lg:px-4">
+            <img src="assets/img/14.jpg" alt="product">
+            <h4 class="text-2xl mt-4 font-lora font-bold txt-grey"><a href="#">Lorem Ipsum</a></h4>
+            <p class="mt-4 txt-grey mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+            <a href="#" class="underline txt-green-ms text-lg font-bold">Order via Whatsapp</a>
+          </div>
+          <div class="lg:w-1/3 px-6 mb-12 lg:mb-8 lg:px-4">
+            <img src="assets/img/06.jpg" alt="product">
+            <h4 class="text-2xl mt-4 font-lora font-bold txt-grey"><a href="#">Lorem Ipsum</a></h4>
+            <p class="mt-4 txt-grey mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+            <a href="#" class="underline txt-green-ms text-lg font-bold">Order via Whatsapp</a>
+          </div>
+          <div class="lg:w-1/3 px-6 mb-12 lg:mb-8 lg:px-4">
+            <img src="assets/img/07.jpg" alt="product">
+            <h4 class="text-2xl mt-4 font-lora font-bold txt-grey"><a href="#">Lorem Ipsum</a></h4>
+            <p class="mt-4 txt-grey mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+            <a href="#" class="underline txt-green-ms text-lg font-bold">Order via Whatsapp</a>
+          </div>
+          <div class="lg:w-1/3 px-6 mb-12 lg:mb-8 lg:px-4">
+            <img src="assets/img/08.jpg" alt="product">
+            <h4 class="text-2xl mt-4 font-lora font-bold txt-grey"><a href="#">Lorem Ipsum</a></h4>
+            <p class="mt-4 txt-grey mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+            <a href="#" class="underline txt-green-ms text-lg font-bold">Order via Whatsapp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white  w-full py-24" id="why-us">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-2xl px-6 lg:px-0">
+          <h3 class="font-bold font-lora txt-grey text-4xl lg:text-5xl pl-6 with-border relative">Why Us?</h3>
+        </div>
+        <div class="flex flex-wrap mt-8 lg:mt-16 lg:-mx-4">
+          <div class="w-2/4 lg:w-1/4 text-center px-4 mb-12">
+            <img class="w-1/4 mx-auto" src="assets/icon/01.png" alt="icon">
+            <h3 class="font-lora font-bold txt-grey mt-4 lg:mt-12 text-xl">Lorem Ipsum</h3>
+            <p class="txt-grey mt-2 text-sm lg:text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+          </div>
+          <div class="w-2/4 lg:w-1/4 text-center px-4 mb-12">
+            <img class="w-1/4 mx-auto" src="assets/icon/02.png" alt="icon">
+            <h3 class="font-lora font-bold txt-grey mt-4 lg:mt-12 text-xl">Lorem Ipsum</h3>
+            <p class="txt-grey mt-2 text-sm lg:text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+          </div>
+          <div class="w-2/4 lg:w-1/4 text-center px-4 mb-12">
+            <img class="w-1/4 mx-auto" src="assets/icon/03.png" alt="icon">
+            <h3 class="font-lora font-bold txt-grey mt-4 lg:mt-12 text-xl">Lorem Ipsum</h3>
+            <p class="txt-grey mt-2 text-sm lg:text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+          </div>
+          <div class="w-2/4 lg:w-1/4 text-center px-4 mb-12">
+            <img class="w-1/4 mx-auto" src="assets/icon/04.png" alt="icon">
+            <h3 class="font-lora font-bold txt-grey mt-4 lg:mt-12 text-xl">Lorem Ipsum</h3>
+            <p class="txt-grey mt-2 text-sm lg:text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="w-full pt-24" id="our-gallery">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-2xl px-6 lg:px-0">
+          <h3 class="font-bold font-lora txt-grey text-4xl lg:text-5xl pl-6 with-border relative">Our Gallery</h3>
+          <p class="mt-12 txt-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+        </div>
+        <div class="w-full flex flex-wrap mt-12 px-6 lg:px-0">
+          <div class="lg:w-1/2 pb-6 lg:pb-0">
+            <img src="assets/img/09.jpg" alt="product">
+          </div>
+          <div class="lg:w-1/2 flex flex-wrap lg:pl-6">
+            <img class="w-1/2 pr-3 pb-3 object-cover" src="assets/img/10.jpg" alt="product">
+            <img class="w-1/2 pl-3 pb-3 object-cover" src="assets/img/11.jpg" alt="product">
+            <img class="w-1/2 pr-3 pt-3 object-cover" src="assets/img/12.jpg" alt="product">
+            <img class="w-1/2 pl-3 pt-3 object-cover" src="assets/img/13.jpg" alt="product">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="w-full pt-24" id="articles">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-2xl px-6 lg:px-0">
+          <h3 class="font-bold font-lora txt-grey text-4xl lg:text-5xl pl-6 with-border relative">Articles</h3>
+          <p class="mt-12 txt-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+        </div>
+        <div class="lg:flex mt-8 lg:mt-12 flex-wrap px-6 lg:px-0 lg:border-gray-400 lg:pb-12 lg:border-b">
+          <div class="lg:w-1/2">
+            <img src="assets/img/14.jpg" alt="product">
+          </div>
+          <div class="lg:w-1/2 lg:pl-8 mt-8 lg:mt-0 border-b border-gray-400 pb-8 lg:border-0 lg:pb-0">
+            <span class="txt-white-grey">2 Desember 2020</span>
+            <p class="font-lora font-bold text-xl pt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor</p>
+            <p class="pt-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+            <a href="#" class="font-bold mt-16 flex items-center">Baca Selengkapnya<span class="ml-4 w-3.5"><img src="assets/icon/arr-left-sm.png" alt="arr-left"></span></a>
+          </div>
+        </div>
+        <div class="lg:flex mt-8 lg:mt-12 lg:-mx-4 flex-wrap">
+          <div class="lg:w-1/3 px-6 mb-12 lg:mb-8 lg:px-4">
+            <img src="assets/img/15.jpg" alt="product">
+            <h4 class="text-2xl mt-4 font-lora font-bold txt-grey"><a href="#">Lorem Ipsum</a></h4>
+            <p class="mt-4 txt-grey mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+          </div>
+          <div class="lg:w-1/3 px-6 mb-12 lg:mb-8 lg:px-4">
+            <img src="assets/img/16.jpg" alt="product">
+            <h4 class="text-2xl mt-4 font-lora font-bold txt-grey"><a href="#">Lorem Ipsum</a></h4>
+            <p class="mt-4 txt-grey mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+          </div>
+          <div class="lg:w-1/3 px-6 mb-12 lg:mb-8 lg:px-4">
+            <img src="assets/img/17.jpg" alt="product">
+            <h4 class="text-2xl mt-4 font-lora font-bold txt-grey"><a href="#">Lorem Ipsum</a></h4>
+            <p class="mt-4 txt-grey mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="w-full bg-white pt-24 pb-24">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-2xl px-6 lg:px-0">
+          <h3 class="font-bold font-lora txt-grey text-4xl lg:text-5xl pl-6 with-border relative">Testimony</h3>
+          <p class="mt-12 txt-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+        </div>
+        <div class="flex flex-wrap mt-8 lg:mt-16 lg:-mx-4">
+          <div class="lg:w-1/3 text-center px-8 mb-12">
+            <img class="w-2/3 lg:w-1/3 mx-auto rounded-full" src="assets/img/p1.png" alt="icon">
+            <p class="txt-grey mt-4 text-sm lg:text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+            <div class="flex justify-center items-center mt-6">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+            </div>
+            <p class="font-lora txt-grey font-bold text-center text-xl mt-4">Basuki Rachmad</p>
+            <p class="txt-white-grey font-bold text-center mt-1">Traditional Dancer</p>
+          </div>
+          <div class="lg:w-1/3 text-center px-8 mb-12">
+            <img class="w-2/3 lg:w-1/3 mx-auto rounded-full" src="assets/img/p2.png" alt="icon">
+            <p class="txt-grey mt-4 text-sm lg:text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+            <div class="flex justify-center items-center mt-6">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+              <img class="rating mx-1" src="assets/icon/bronze-star.png" alt="star-bronze">
+            </div>
+            <p class="font-lora txt-grey font-bold text-center text-xl mt-4">Yayuk Basuki</p>
+            <p class="txt-white-grey font-bold text-center mt-1">Pengacara</p>
+          </div>
+          <div class="lg:w-1/3 text-center px-8 mb-12">
+            <img class="w-2/3 lg:w-1/3 mx-auto rounded-full" src="assets/img/p3.png" alt="icon">
+            <p class="txt-grey mt-4 text-sm lg:text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+            <div class="flex justify-center items-center mt-6">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+              <img class="rating mx-1" src="assets/icon/gold-star.png" alt="star-gold">
+              <img class="rating mx-1" src="assets/icon/bronze-star.png" alt="star-bronze">
+            </div>
+            <p class="font-lora txt-grey font-bold text-center text-xl mt-4">Basuki Hutabarat</p>
+            <p class="txt-white-grey font-bold text-center mt-1">Reastaurant Chef</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="w-full relative" id="contact-us">
+      <div class="max-w-6xl mx-auto relative py-24">
+        <div class="max-w-4xl mx-auto relative flex flex-wrap">
+          <div class="lg:w-1/2">
+            <div class="w-full px-6 lg:w-2/3 lg:px-0">
+              <h2 class="font-bold text-4xl relative txt-grey font-lora">Contact Us</h2>
+              <p class="txt-grey mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque at neque duis orci morbi vestibulum.</p>
+              <div class="flex items-center py-6">
+                <img class="w-1/6 mr-4" src="assets/icon/05.png" alt="icon">
+                <p class="font-bold">+62 8999 3921 245</p>
+              </div>
+              <div class="flex items-center py-6">
+                <img class="w-1/6 mr-4" src="assets/icon/06.png" alt="icon">
+                <p class="font-bold">Jalan Kemang Timur 69, Jakarta Selatan, 12345</p>
+              </div>
+              <div class="flex items-center py-6">
+                <img class="w-1/6 mr-4" src="assets/icon/07.png" alt="icon">
+                <p class="font-bold">Noreply@gmail.com</p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full mt-12 lg:mt-0 lg:w-1/2 mx-auto px-6 lg:px-0">
+            <form>
+                <input type="text" class="appearance-none block w-full border mb-4 border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-transparent bg-transparent" placeholder="Your Name">
+                <input type="email" class="appearance-none block w-full border mb-4 border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-transparent bg-transparent" placeholder="Your Name">
+                <textarea class="appearance-none block w-full border mb-4 border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-transparent bg-transparent" id="" cols="15" rows="8" placeholder="Your Message"></textarea>
+                <div class="flex items-center justify-start mt-6 lg:mt-8">
+                  <button class="rounded uppercase px-8 py-1 inline-block text-white font-bold bg-green-ms">SEND MESSAGE</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="w-full bg-white">
+      <div class="max-w-6xl mx-auto relative py-16">
+        <div class="flex flex-wrap w-full">
+          <div class="flex w-full lg:w-1/3 justify-start items-center px-6 lg:px-0">
+            <p class="font-lora text-lg font-bold">Temukan kami di marketplace :</p>
+          </div>
+          <div class="lg:w-2/3 flex justify-between items-center flex-wrap mt-12 lg:mt-0">
+            <a class="px-8 lg:px-4 w-1/2 lg:w-1/4 mb-12 lg:mb-0" href="#">
+              <img src="assets/icon/tokopedia.png" alt="tokopedia">
+            </a>
+            <a class="px-8 lg:px-4 w-1/2 lg:w-1/4 mb-12 lg:mb-0" href="#">
+              <img src="assets/icon/shopee.png" alt="shopee">
+            </a>
+            <a class="px-8 lg:px-4 w-1/2 lg:w-1/4 mb-12 lg:mb-0" href="#">
+              <img src="assets/icon/lazada.png" alt="lazada">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-gray-800">
+        <div class="max-w-6xl mx-auto relative py-8 justify-between items-center lg:flex">
+          <div class="logo w-1/2 mx-auto lg:mx-0 lg:w-1/6"><a href="#"><img src="assets/icon/logo-white.png" alt="logo"></a></div>
+          <div class="px-6 text-center mt-8 lg:mt-0 lg:text-left lg:px-0">
+            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+    </footer>
+    
+    <div class="chatus fixed z-40">
+      <a href="#" class="flex items-center">
+        <p class="font-bold text-white text-lg mr-4 hidden lg:block">Chat Us</p>
+        <img src="assets/icon/wa.png" alt="whatsup">
+      </a>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js?ver=2.6.10"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js?ver=4.5.0"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
